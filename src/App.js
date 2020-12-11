@@ -55,8 +55,8 @@ class App extends React.Component {
     }
   }
   render() {
-    const { filter } = this.state;
-    const normalize = this.state.filter.toLowerCase();
+    const { contacts, filter } = this.state;
+    const normalize = this.state.filter.toLowerCase().trim();
     const visibleContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalize),
     );
@@ -67,6 +67,7 @@ class App extends React.Component {
         <ContactForm onSubmit={this.addContact} />
         <h2>Contacts</h2>
         <Filter value={filter} onChangle={this.changeFilter} />
+        {!contacts.length && <div>Немає жодного контакту, додайте контакт</div>}
         <ContactsList
           contacts={visibleContacts}
           onDeleteContact={this.deleteContact}
